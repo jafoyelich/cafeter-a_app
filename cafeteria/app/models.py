@@ -11,6 +11,9 @@ class Origen(Model):
     def __repr__(self):
         return self.nombre
 
+    def __lt__(self, other):
+        return self.nombre < other.nombre
+
 
 class Cafe(Model):
     __tablename__ = "cafe"
@@ -25,6 +28,9 @@ class Cafe(Model):
     def __repr__(self):
         return self.nombre
 
+    def __lt__(self, other):
+        return self.nombre < other.nombre
+
 
 Origen.cafes = relationship("Cafe", order_by=Cafe.id, back_populates="origen")
 
@@ -37,6 +43,9 @@ class Metodo(Model):
 
     def __repr__(self):
         return self.nombre
+
+    def __lt__(self, other):
+        return self.nombre < other.nombre
 
 
 class RegistroExtraccion(Model):
