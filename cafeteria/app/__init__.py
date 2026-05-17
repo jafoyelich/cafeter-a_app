@@ -1,15 +1,18 @@
+import logging
+
 from flask import Flask
+from flask_appbuilder import AppBuilder
+from flask_appbuilder.models.sqla.base import SQLA
+from .security import CustomSecurityManager
 
-from flask_appbuilder.extensions import db
-from .extensions import appbuilder
+# Logging configuration
+logging.basicConfig(format="%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+logging.getLogger().setLevel(logging.DEBUG)
 
+app = Flask(__name__)
+app.config.from_object("config")
+db = SQLA(app)
 
-def create_app() -> Flask:
-    app = Flask(__name__)
-    app.config.from_object("config")
-    with app.app_context():
-        appbuilder.init_app(app)
-        db.create_all()
-        # Registering the views and APIs
-        ...
-    return app
+with app.app_context():
+    appbuilder = AppBuilder(app, db.session, security_manager_class=CustomSecurityManager)
+    from . import views
