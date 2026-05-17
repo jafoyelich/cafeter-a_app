@@ -1,9 +1,42 @@
 from flask import current_app, render_template
 
-from flask_appbuilder import ModelView
+from flask_appbuilder import ModelView, DirectByChartView, GroupByChartView
 from flask_appbuilder.models.sqla.interface import SQLAInterface
+from flask_appbuilder.models.group import aggregate_count, aggregate_avg
 from . import appbuilder, db
 from .models import Origen, Cafe, Metodo, RegistroExtraccion
+
+class MethodChartView(GroupByChartView):
+    datamodel = SQLAInterface(RegistroExtraccion)
+    chart_title = "Extracciones por Método"
+    group_by_columns = ["metodo"]
+    definitions = [
+        {
+            "label": "Cantidad de Extracciones",
+            "group": "metodo",
+            "series": [(aggregate_count, "id")],
+            "type": "pie",
+        }
+    ]
+
+class RegistroStatsView(GroupByChartView):
+    datamodel = SQLAInterface(RegistroExtraccion)
+    chart_title = "Estadísticas de Extracciones"
+    group_by_columns = ["cafe", "metodo"]
+    definitions = [
+        {
+            "label": "Promedio de Puntaje",
+            "group": "cafe",
+            "series": [(aggregate_avg, "puntaje")],
+            "type": "column",
+        },
+        {
+            "label": "Cantidad de Extracciones",
+            "group": "metodo",
+            "series": [(aggregate_count, "id")],
+            "type": "bar",
+        },
+    ]
 
 class OrigenView(ModelView):
     datamodel = SQLAInterface(Origen)
@@ -54,6 +87,8 @@ appbuilder.add_view(OrigenView, "Orígenes", icon="fa-globe", category="Configur
 appbuilder.add_view(CafeView, "Cafés", icon="fa-coffee", category="Configuración")
 appbuilder.add_view(MetodoView, "Métodos", icon="fa-flask", category="Configuración")
 appbuilder.add_view(RegistroExtraccionView, "Mis Extracciones", icon="fa-list", category="Diario")
+appbuilder.add_view(MethodChartView, "Gráfica por Método", icon="fa-pie-chart", category="Estadísticas")
+appbuilder.add_view(RegistroStatsView, "Análisis Detallado", icon="fa-bar-chart", category="Estadísticas")
 
 @current_app.errorhandler(404)
 def page_not_found(e):
