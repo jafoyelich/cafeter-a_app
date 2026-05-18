@@ -1,0 +1,123 @@
+body{
+    font-family: "Montserrat", sans-serif;
+    background:#f5f1ea;
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+.container {
+    flex: 1;
+  }
+.navbar{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.well{
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.navbar-brand{
+    color:white ;
+    font-weight:bold;
+}
+
+.sidebar{
+    background:#000000;
+}
+
+footer{
+    text-align:center;
+    padding:5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color:white;
+}
+
+
+.icon {
+    font-size: 1.5em;
+    color: white;
+    margin-left: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.icon:hover {
+    color:gray;
+}
+
+
+
+.btn-primary {
+    transition: all 0.2s ease-in;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+    border: none;
+    position: relative;
+    display: inline-block;
+    font-weight: light;
+    color: #000000;
+    font-size: 16px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 3px;
+ 
+  }
+
+  .btn-primary:active{
+    color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+  }
+  
+  .btn-primary:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+  }
+
+  .btn-primary:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+ z-index: -1;
+  }
+
+  .btn-primary:hover {
+    color: #ffffff;
+    border-radius: 0.5em;
+  }
+  
+.panel {
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+}
+
+.panel-primary>.panel-heading
+ {
+    color: #fff;
+    background-color: rgba(29, 80, 146, 0.7);
+}
+  
+ 
