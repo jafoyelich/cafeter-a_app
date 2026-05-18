@@ -14,5 +14,6 @@ app.config.from_object("config")
 db = SQLA(app)
 
 with app.app_context():
-    appbuilder = AppBuilder(app, db.session, security_manager_class=CustomSecurityManager)
+    from .index_view import MyIndexView
+    appbuilder = AppBuilder(app, db.session, security_manager_class=CustomSecurityManager, indexview=MyIndexView)
     from . import views
